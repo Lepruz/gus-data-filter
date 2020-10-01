@@ -15,7 +15,7 @@ csv_extension = "*.csv"
 city_filenames = [os.path.basename(x) for x in glob.glob(path + csv_extension)]
 
 for city_filename in city_filenames:
-    df = pd.read_csv(path + city_filename, sep = ';',error_bad_lines=False, encoding='utf-8', index_col = False)
+    df = pd.read_csv(path + city_filename, sep = ';',error_bad_lines=False, encoding='utf-8')
     df.fillna('',inplace=True)
     filtered_data = []
 
@@ -35,6 +35,7 @@ for city_filename in city_filenames:
 
     # conversion from list to pd dataframe
     filtered_data_df = pd.concat(filtered_data)
-    filtered_data_df.to_csv("gus_csv/filtered/" + city_filename , sep=';', encoding='utf-8')
+    print(filtered_data_df.keys())
+    filtered_data_df.to_csv("gus_csv/filtered/" + city_filename , sep=';', encoding='utf-8', index = False)
 
 
