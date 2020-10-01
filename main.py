@@ -31,11 +31,22 @@ for city_filename in city_filenames:
             (df[FilteredFactorsColumnNameEnum.Miara] == row[FilteredFactorsColumnNameEnum.Miara])
             ]
 
+        if temp_row.empty:
+            temp_row = pd.DataFrame(data = {FilteredFactorsColumnNameEnum.Kategoria: row[FilteredFactorsColumnNameEnum.Kategoria],
+                                            FilteredFactorsColumnNameEnum.Grupa: row[FilteredFactorsColumnNameEnum.Grupa],
+                                            FilteredFactorsColumnNameEnum.Podgrupa: row[FilteredFactorsColumnNameEnum.Podgrupa],
+                                            FilteredFactorsColumnNameEnum.Wymiar1: row[FilteredFactorsColumnNameEnum.Wymiar1],
+                                            FilteredFactorsColumnNameEnum.Wymiar2: row[FilteredFactorsColumnNameEnum.Wymiar2],
+                                            FilteredFactorsColumnNameEnum.Wymiar3: row[FilteredFactorsColumnNameEnum.Wymiar3],
+                                            FilteredFactorsColumnNameEnum.Wymiar4: row[FilteredFactorsColumnNameEnum.Wymiar4],
+                                            FilteredFactorsColumnNameEnum.Miara: row[FilteredFactorsColumnNameEnum.Miara]},
+                                            index = [0])
+            print(temp_row)
+            
         filtered_data.append(temp_row)
 
     # conversion from list to pd dataframe
     filtered_data_df = pd.concat(filtered_data)
-    print(filtered_data_df.keys())
     filtered_data_df.to_csv("gus_csv/filtered/" + city_filename , sep=';', encoding='utf-8', index = False)
 
 
