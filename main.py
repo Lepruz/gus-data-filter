@@ -17,6 +17,7 @@ city_filenames = [os.path.basename(x) for x in glob.glob(path + csv_extension)]
 for city_filename in city_filenames:
     df = pd.read_csv(path + city_filename, sep=';', error_bad_lines=False, encoding='utf-8')
     df.fillna('', inplace=True)
+    df = df.loc[:, :FilteredFactorsColumnNameEnum.Rok2020]
     filtered_data = []
 
     for index, row in factors.iterrows():
