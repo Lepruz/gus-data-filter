@@ -36,6 +36,7 @@ for city_filename in city_filenames:
 
     for index, row in factors.iterrows():
         temp_row = find_row_by_columns(df, row)
+        temp_row[FilteredFactorsColumnNameEnum.Dzielnik] = row[FilteredFactorsColumnNameEnum.Dzielnik]
 
         if temp_row.empty:
             temp_row = pd.DataFrame(
@@ -46,7 +47,8 @@ for city_filename in city_filenames:
                       FilteredFactorsColumnNameEnum.Wymiar2: row[FilteredFactorsColumnNameEnum.Wymiar2],
                       FilteredFactorsColumnNameEnum.Wymiar3: row[FilteredFactorsColumnNameEnum.Wymiar3],
                       FilteredFactorsColumnNameEnum.Wymiar4: row[FilteredFactorsColumnNameEnum.Wymiar4],
-                      FilteredFactorsColumnNameEnum.Miara: row[FilteredFactorsColumnNameEnum.Miara]},
+                      FilteredFactorsColumnNameEnum.Miara: row[FilteredFactorsColumnNameEnum.Miara],
+                      FilteredFactorsColumnNameEnum.Dzielnik: row[FilteredFactorsColumnNameEnum.Dzielnik]},
                 index=[0])
             #filtrowanie po kolekcji bo nie wiem jak ją złączyć i wyszukać w niej raz
             # if not missing_rows or find_row_by_columns(pd.concat(missing_rows), temp_row).empty: -> coś takiego nie działa a szkoda czasu
@@ -54,11 +56,12 @@ for city_filename in city_filenames:
                 missing_rows.append(temp_row)
             print(temp_row)
 
+
         filtered_data.append(temp_row)
 
     # conversion from list to pd dataframe
     filtered_data_df = pd.concat(filtered_data)
     filtered_data_df.to_csv("gus_csv/filtered/" + city_filename, sep=';', encoding='utf-8', index=False)
 
-missing_rows_df = pd.concat(missing_rows)
-missing_rows_df.to_csv("gus_csv/filtered/missing_rows.csv", sep=';', encoding='utf-8', index=False)
+#missing_rows_df = pd.concat(missing_rows)
+#missing_rows_df.to_csv("gus_csv/filtered/missing_rows.csv", sep=';', encoding='utf-8', index=False)
