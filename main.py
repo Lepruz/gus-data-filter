@@ -31,6 +31,7 @@ for city_filename in city_filenames:
             (df[FilteredFactorsColumnNameEnum.Wymiar4] == row[FilteredFactorsColumnNameEnum.Wymiar4]) &
             (df[FilteredFactorsColumnNameEnum.Miara] == row[FilteredFactorsColumnNameEnum.Miara])
             ]
+        temp_row[FilteredFactorsColumnNameEnum.Dzielnik] = row[FilteredFactorsColumnNameEnum.Dzielnik]
         filtered_data.append(temp_row)
 
     # conversion from list to pd dataframe
