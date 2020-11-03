@@ -17,7 +17,7 @@ city_filenames = [os.path.basename(x) for x in glob.glob(path + csv_extension)]
 for city_filename in city_filenames:
     df = pd.read_csv(path + city_filename, sep=';', error_bad_lines=False, encoding='utf-8')
     df.fillna('', inplace=True)
-    df = df.loc[:, :FilteredFactorsColumnNameEnum.Rok2020]
+    df = df.loc[:, :FilteredFactorsColumnNameEnum.Rok2015]
     filtered_data = []
 
     for index, row in factors.iterrows():
@@ -28,7 +28,6 @@ for city_filename in city_filenames:
             (df[FilteredFactorsColumnNameEnum.Wymiar1] == row[FilteredFactorsColumnNameEnum.Wymiar1]) &
             (df[FilteredFactorsColumnNameEnum.Wymiar2] == row[FilteredFactorsColumnNameEnum.Wymiar2]) &
             (df[FilteredFactorsColumnNameEnum.Wymiar3] == row[FilteredFactorsColumnNameEnum.Wymiar3]) &
-            (df[FilteredFactorsColumnNameEnum.Wymiar4] == row[FilteredFactorsColumnNameEnum.Wymiar4]) &
             (df[FilteredFactorsColumnNameEnum.Miara] == row[FilteredFactorsColumnNameEnum.Miara])
             ]
         temp_row[FilteredFactorsColumnNameEnum.Dzielnik] = row[FilteredFactorsColumnNameEnum.Dzielnik]
